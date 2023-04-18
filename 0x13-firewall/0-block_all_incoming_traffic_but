@@ -1,0 +1,15 @@
+#install ufw on web server
+apt-get install ufw
+
+ufw disable
+#block all incoming traffic
+ufw default deny incoming
+#allow all incoming traffic
+ufw default allow outgoing
+
+allow incoming traffic except the  following
+ufw allow 22/tcp
+ufw allow 443/tcp
+ufw allow 80/tcp
+#enable ufw
+ufw enable
