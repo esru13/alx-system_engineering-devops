@@ -21,18 +21,18 @@ listen hbnb
     balance roundrobin
     option httpclose
     option forwardfor
-    server 20205-web-01 52.86.153.90:80 check
-    server 20205-web-02 52.91.182.147:80 check
+    server 39159-web-01 54.152.232.124:80 check
+    server 39159-web-02 34.202.157.225:80 check
     option  forwardfor
     option  http-server-close
 
 frontend www-http
-    bind   52.91.182.147:80
+    bind   100.25.24.215:80
     reqadd X-Forwarded-Proto:\ http
     default_backend www-backend
 
 frontend www-https
-    bind   52.91.182.147:443 ssl crt /etc/haproxy/certs/www.esru-13.tech
+    bind   100.25.24.215:443 ssl crt /etc/haproxy/certs/www.tsedal.tech.pem
     reqadd X-Forwarded-Proto:\ https
     acl letsencrypt-acl path_beg /.well-known/acme-challenge/
     use_backend letsencrypt-backend if letsencrypt-acl
@@ -40,8 +40,8 @@ frontend www-https
 
 backend www-backend
    redirect scheme https if !{ ssl_fc }
-   server web-01 52.86.153.90:80 check
-   server web-02 52.91.182.147:80 check
+   server web-01 54.152.232.124:80 check
+   server web-02 34.202.157.225:80 check
 
 backend letsencrypt-backend
    server letsencrypt 127.0.0.1:54321
